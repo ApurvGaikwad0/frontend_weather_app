@@ -87,24 +87,33 @@ export default function WeatherApp() {
   }
 
   return (
-    <main className="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 className="text-3xl font-bold text-center mb-8">Weather App</h1>
+    <main className="container mx-auto px-4 py-8 max-w-4xl relative">
+      <div className="absolute inset-0 -z-10 bg-cover bg-center" style={{ backgroundImage: "url('/weather-bg.jpg')" }}></div>
+      <div className="absolute inset-0 -z-10 bg-black/30 backdrop-blur-md"></div>
 
-      <Card className="mb-6">
+      <h1 className="text-4xl font-bold text-center mb-8 text-white">Weather App</h1>
+
+      <Card className="mb-6 shadow-lg border border-gray-200 bg-white/30 backdrop-blur-md">
         <CardContent className="pt-6">
-          <form onSubmit={handleSearch} className="flex gap-2">
+          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4 items-center">
             <Input
               type="text"
               placeholder="Enter city, zip code, or coordinates..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="flex-1"
+              className="flex-1 rounded-full shadow-md bg-black/70 backdrop-blur-md"
             />
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" disabled={loading} className="rounded-full px-6 py-2 bg-blue-500 text-white hover:bg-blue-600">
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
               <span className="ml-2 hidden sm:inline">Search</span>
             </Button>
-            <Button type="button" variant="outline" onClick={handleGetCurrentLocation} disabled={geoLoading}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleGetCurrentLocation}
+              disabled={geoLoading}
+              className="rounded-full px-6 py-2 border-blue-500 text-black-500 hover:bg-blue-100"
+            >
               {geoLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <MapPin className="h-4 w-4" />}
               <span className="ml-2 hidden sm:inline">Current Location</span>
             </Button>
@@ -113,7 +122,7 @@ export default function WeatherApp() {
       </Card>
 
       {error && (
-        <Alert variant={error.includes("API key") ? "destructive" : "default"} className="mb-6">
+        <Alert variant={error.includes("API key") ? "destructive" : "default"} className="mb-6 shadow-md bg-white/30 backdrop-blur-md">
           <AlertDescription>
             {error.includes("API key") ? (
               <div>
@@ -128,7 +137,7 @@ export default function WeatherApp() {
                         href="https://openweathermap.org/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="underline"
+                        className="underline text-blue-500"
                       >
                         OpenWeatherMap
                       </a>
@@ -154,9 +163,9 @@ export default function WeatherApp() {
       )}
 
       {!weather && !error && (
-        <Card className="bg-muted/40">
+        <Card className="bg-white/30 backdrop-blur-md shadow-md">
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <p className="text-center text-muted-foreground">
+            <p className="text-center text-white text-lg">
               Enter a location or use your current location to get weather information
             </p>
           </CardContent>

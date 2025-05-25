@@ -37,9 +37,9 @@ export default function ForecastDisplay({ forecast }: ForecastDisplayProps) {
     })
 
   return (
-    <Card>
+    <Card className="bg-white/30 backdrop-blur-md shadow-lg rounded-xl border border-white/20">
       <CardHeader>
-        <CardTitle className="text-xl">5-Day Forecast</CardTitle>
+        <CardTitle className="text-xl text-center text-black">5-Day Forecast</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -50,15 +50,18 @@ export default function ForecastDisplay({ forecast }: ForecastDisplayProps) {
             const iconUrl = getWeatherIcon(weatherCondition.icon)
 
             return (
-              <div key={index} className="flex flex-col items-center p-2 bg-muted/20 rounded-md">
-                <p className="font-medium">{dayName}</p>
+              <div
+                key={index}
+                className="flex flex-col items-center p-4 bg-white/20 backdrop-blur-md rounded-lg shadow-md border border-white/10"
+              >
+                <p className="font-medium text-black">{dayName}</p>
                 <img
                   src={iconUrl || "/placeholder.svg"}
                   alt={weatherCondition.description}
                   className="w-12 h-12 my-2"
                 />
-                <p className="text-sm text-center">{weatherCondition.main}</p>
-                <div className="flex justify-between w-full mt-1">
+                <p className="text-sm text-center text-black">{weatherCondition.main}</p>
+                <div className="flex justify-between w-full mt-1 text-black">
                   <span className="text-sm">{Math.round(item.main.temp_min)}°</span>
                   <span className="text-sm font-medium">{Math.round(item.main.temp_max)}°</span>
                 </div>
